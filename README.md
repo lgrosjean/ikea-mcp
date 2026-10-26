@@ -12,16 +12,16 @@ Runs on [Bun](https://bun.sh) ≥ 1.4.4.
 
 ## Tools
 
-| Tool | What it does |
-| --- | --- |
-| `search_products` | Catalog search, with an optional max price |
-| `get_product` | Details of an item or a combination |
-| `list_stores` | Stores, addresses, opening hours, upcoming closures |
-| `shopping_list_view` | Shopping list + totals (price, packages, weight), optional price re-check |
-| `shopping_list_add` / `shopping_list_remove` / `shopping_list_clear` | Manage the list |
-| `cart_view` | IKEA cart with prices incl. VAT, eco fee, packages and weight computed by IKEA |
-| `cart_add` / `cart_add_shopping_list` | Add items, or the whole shopping list |
-| `cart_set_quantity` / `cart_remove` / `cart_clear` | Manage the cart |
+| Tool                                                                 | What it does                                                                   |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `search_products`                                                    | Catalog search, with an optional max price                                     |
+| `get_product`                                                        | Details of an item or a combination                                            |
+| `list_stores`                                                        | Stores, addresses, opening hours, upcoming closures                            |
+| `shopping_list_view`                                                 | Shopping list + totals (price, packages, weight), optional price re-check      |
+| `shopping_list_add` / `shopping_list_remove` / `shopping_list_clear` | Manage the list                                                                |
+| `cart_view`                                                          | IKEA cart with prices incl. VAT, eco fee, packages and weight computed by IKEA |
+| `cart_add` / `cart_add_shopping_list`                                | Add items, or the whole shopping list                                          |
+| `cart_set_quantity` / `cart_remove` / `cart_clear`                   | Manage the cart                                                                |
 
 The shopping list is saved in `~/.ikea-mcp/shopping-list.json`.
 
@@ -74,16 +74,17 @@ and rejects requests whose Host header is not local.
 
 ## Configuration
 
-| Variable | Default | Purpose |
-| --- | --- | --- |
-| `IKEA_COUNTRY` / `IKEA_LANG` | `fr` / `fr` | IKEA website to use (e.g. `gb`/`en`, `us`/`en`, `de`/`de`) |
-| `IKEA_LIST_FILE` | `~/.ikea-mcp/shopping-list.json` | Shopping list file |
-| `IKEA_CART_FILE` | `~/.ikea-mcp/cart.json` | Guest cart token |
-| `PORT` | `3000` | HTTP mode port |
+| Variable                     | Default                          | Purpose                                                    |
+| ---------------------------- | -------------------------------- | ---------------------------------------------------------- |
+| `IKEA_COUNTRY` / `IKEA_LANG` | `fr` / `fr`                      | IKEA website to use (e.g. `gb`/`en`, `us`/`en`, `de`/`de`) |
+| `IKEA_LIST_FILE`             | `~/.ikea-mcp/shopping-list.json` | Shopping list file                                         |
+| `IKEA_CART_FILE`             | `~/.ikea-mcp/cart.json`          | Guest cart token                                           |
+| `PORT`                       | `3000`                           | HTTP mode port                                             |
 
 ## Development
 
 ```bash
 bun test             # end-to-end tests (stdio + HTTP) against the real IKEA website
-bun run typecheck
+bun check            # type check (Bun's built-in checker, no tsc needed)
+bun fmt              # format (Bun's built-in formatter, config in bunfig.toml)
 ```

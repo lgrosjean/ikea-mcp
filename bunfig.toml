@@ -1,0 +1,4 @@
+[fmt]
+# Keeps the project's style: single quotes and long lines.
+printWidth = 140
+singleQuote = true

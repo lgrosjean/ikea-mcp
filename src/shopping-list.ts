@@ -86,8 +86,7 @@ export async function viewList(list?: List, { refreshPrices = false } = {}) {
     ...a,
     subtotal: a.unitPrice != null ? round2(a.unitPrice * a.quantity) : undefined,
   }));
-  const sum = (f: (a: (typeof items)[number]) => number | undefined) =>
-    round2(items.reduce((t, a) => t + (f(a) ?? 0), 0));
+  const sum = (f: (a: (typeof items)[number]) => number | undefined) => round2(items.reduce((t, a) => t + (f(a) ?? 0), 0));
   return {
     items,
     totals: {

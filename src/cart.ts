@@ -54,7 +54,11 @@ async function token(): Promise<string> {
 }
 
 const POPULATE = { fetchCartContext: false, fetchItemInfo: true, fetchIndicativeAvailability: false, fetchPrice: true };
-const POPULATE_QUERY = { ...Object.fromEntries(Object.entries(POPULATE).map(([k, v]) => [k, String(v)])), shoppingProfile: 'ONLINE', group: 'DEFAULT' };
+const POPULATE_QUERY = {
+  ...Object.fromEntries(Object.entries(POPULATE).map(([k, v]) => [k, String(v)])),
+  shoppingProfile: 'ONLINE',
+  group: 'DEFAULT',
+};
 
 function describeError(status: number, data: Raw) {
   const details = [
@@ -65,11 +69,21 @@ function describeError(status: number, data: Raw) {
 }
 
 // Reads and deletes pass options in the query string, writes in the body.
-async function cartRequest(method: string, path = '', { query, items }: { query?: Record<string, string>; items?: object[] } = {}, retried = false): Promise<Raw> {
+async function cartRequest(
+  method: string,
+  path = '',
+  { query, items }: { query?: Record<string, string>; items?: object[] } = {},
+  retried = false,
+): Promise<Raw> {
   const params = items ? '' : `?${new URLSearchParams({ ...query, ...POPULATE_QUERY })}`;
   const res = await fetch(`${CART_URL}${path}${params}`, {
     method,
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${await token()}`, 'X-Consumer-Name': 'Web Cart', 'Accept-Language': LANG },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${await token()}`,
+      'X-Consumer-Name': 'Web Cart',
+      'Accept-Language': LANG,
+    },
     body: items && JSON.stringify({ shoppingProfile: 'ONLINE', group: 'DEFAULT', populateCart: POPULATE, items }),
     signal: AbortSignal.timeout(20_000),
   });
