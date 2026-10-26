@@ -1,0 +1,26 @@
+{
+  "name": "ikea-mcp",
+  "version": "0.1.0",
+  "description": "Unofficial MCP server to plan IKEA shopping: search, product details, stores, shopping list and guest cart.",
+  "repository": { "type": "git", "url": "git+https://github.com/lgrosjean/ikea-mcp.git" },
+  "keywords": ["mcp", "model-context-protocol", "ikea", "bun", "claude"],
+  "type": "module",
+  "module": "src/server.ts",
+  "packageManager": "bun@1.4.4",
+  "engines": { "bun": ">=1.4.4" },
+  "scripts": {
+    "start": "bun src/server.ts",
+    "serve": "bun src/server.ts --http",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "build": "bun build src/server.ts --compile --minify --outfile dist/ikea-mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.4",
+    "typescript": "7.0.2"
+  }
+}
