@@ -39,27 +39,39 @@ not signed in). The token is valid for 30 days and kept in `~/.ikea-mcp/cart.jso
 
 ## Installation
 
-```bash
-bun install
-bun run build        # builds the standalone executable dist/ikea-mcp
-```
+Straight from GitHub with `bunx`, nothing to clone: Bun fetches the repository and its
+dependencies into its cache on first launch.
 
-### Claude Code (stdio)
+### Claude Code
 
 ```bash
-claude mcp add ikea -- /path/to/ikea-mcp/dist/ikea-mcp
+claude mcp add ikea -- bunx -p github:lgrosjean/ikea-mcp ikea-mcp
 ```
 
-### Claude Desktop (stdio)
+### Claude Desktop
 
-In `~/Library/Application Support/Claude/claude_desktop_config.json`:
+In Settings → Developer → Edit Config (`~/Library/Application Support/Claude/claude_desktop_config.json`),
+add an `ikea` entry under `mcpServers`, then quit (⌘Q) and reopen Claude Desktop. Use the absolute
+path to `bunx`: Claude Desktop does not see `~/.bun/bin` in its `PATH`.
 
 ```json
 {
   "mcpServers": {
-    "ikea": { "command": "/path/to/ikea-mcp/dist/ikea-mcp" }
+    "ikea": {
+      "command": "/Users/YOU/.bun/bin/bunx",
+      "args": ["-p", "github:lgrosjean/ikea-mcp", "ikea-mcp"]
+    }
   }
 }
+```
+
+### From source
+
+```bash
+git clone https://github.com/lgrosjean/ikea-mcp.git && cd ikea-mcp
+bun install
+bun run build        # builds the standalone executable dist/ikea-mcp
+claude mcp add ikea -- "$PWD/dist/ikea-mcp"
 ```
 
 ### HTTP (Bun.serve)
