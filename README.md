@@ -40,12 +40,13 @@ not signed in). The token is valid for 30 days and kept in `~/.ikea-mcp/cart.jso
 ## Installation
 
 Straight from GitHub with `bunx`, nothing to clone: Bun fetches the repository and its
-dependencies into its cache on first launch.
+dependencies into its cache on first launch. The commands below pin the latest
+[release](https://github.com/lgrosjean/ikea-mcp/releases), `v0.1.0`.
 
 ### Claude Code
 
 ```bash
-claude mcp add ikea -- bunx -p github:lgrosjean/ikea-mcp ikea-mcp
+claude mcp add ikea -- bunx -p 'github:lgrosjean/ikea-mcp#v0.1.0' ikea-mcp
 ```
 
 ### Claude Desktop
@@ -59,11 +60,23 @@ path to `bunx`: Claude Desktop does not see `~/.bun/bin` in its `PATH`.
   "mcpServers": {
     "ikea": {
       "command": "/Users/YOU/.bun/bin/bunx",
-      "args": ["-p", "github:lgrosjean/ikea-mcp", "ikea-mcp"]
+      "args": ["-p", "github:lgrosjean/ikea-mcp#v0.1.0", "ikea-mcp"]
     }
   }
 }
 ```
+
+### Pinned release or latest `main`
+
+- **`github:lgrosjean/ikea-mcp#v0.1.0`** always runs that exact release. To upgrade, change
+  the tag in the command or config.
+- **`github:lgrosjean/ikea-mcp`** (no tag) follows `main`. `bunx` reuses its cached copy and
+  checks GitHub again at most once a day. To pick up the latest commit right away, clear that
+  copy; the next launch downloads `main` again:
+
+  ```bash
+  rm -rf ~/.bun/install/cache/.bunx-*/ikea-mcp@github@*
+  ```
 
 ### From source
 
